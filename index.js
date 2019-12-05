@@ -24,6 +24,7 @@ app.use('/graphql', graphqlHttp({
     schema,
     rootValue: root,
     graphiql: true
+    // probando
 
 }))
 
