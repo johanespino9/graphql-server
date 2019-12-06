@@ -5,19 +5,39 @@ import schema from "./schema";
 const app = express()
 
 app.get('/', (req, res) => {
-    res.send('Hola')
+    res.json('Hola')
 })
-// resolver
 
+
+class Cliente {
+    constructor(id, { nombre, apellido, empresa, email}){
+        this.id = id
+        this.nombre = nombre
+        this.apellido = apellido
+        this.empresa = empresa
+        this.email = email
+    }
+}
+
+const clientesDB = {}
+
+// resolver
 const root = { cliente: () => {
     return {
-        "id": 23900094,
+        "id": 239000954,
         "nombre": "Johan",
         "apellido": "Espino",
         "empresa": "Spino Lab", 
         "email": "correo@gmail.com"
     }
-} }
+
+    },
+    crearCliente : ({input}) => {
+        const id = require('crypto').randomBytes(10).toString('hex')
+        clientesDB[id] = input
+        return new Cliente(id, input)
+    }
+} 
 
 app.use('/graphql', graphqlHttp({
     // que schema se va a usar 
@@ -28,6 +48,6 @@ app.use('/graphql', graphqlHttp({
 
 }))
 
-app.listen(3000, () => {
+app.listen(5600, () => {
     console.log('Corriendo')
 })
