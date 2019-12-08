@@ -6,6 +6,7 @@ const schema = buildSchema(`
         apellido: String
         empresa: String
         email: String
+        edad: Int
     }
 
     type Query {
@@ -14,10 +15,11 @@ const schema = buildSchema(`
 
     input ClienteInput {
         id: ID
-        nombre: String
-        apellido: String
-        empresa: String
-        email: String
+        nombre: String!
+        apellido: String!
+        empresa: String!
+        email: String!
+        edad: Int!
     }
 
     type Mutation {
