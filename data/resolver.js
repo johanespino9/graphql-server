@@ -22,11 +22,9 @@ export const resolvers = {
   },
   Mutation: {
     crearCliente : (_,{input}) => {
-    console.log("TCL: input////////", input)
-      
-        const id = require('crypto').randomBytes(10).toString('hex')
-        clientesDB[id] = input
-        return new Cliente(id, input)
+      const id = require('crypto').randomBytes(10).toString('hex')
+      clientesDB[id] = input
+      return new Cliente(id, input)
     }
   }
 } 
