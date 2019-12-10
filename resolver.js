@@ -14,15 +14,19 @@ class Cliente {
 const clientesDB = {}
 
 // resolver
-const resolvers = { 
-  getCliente: ({id}) => {
-    return new Cliente(id, clientesDB[id])
+export const resolvers = { 
+  Query: {
+    getCliente: (_,{id}) => {
+      return new Cliente(id, clientesDB[id])
+    },
   },
-  crearCliente : ({input}) => {
-      const id = require('crypto').randomBytes(10).toString('hex')
-      clientesDB[id] = input
-      return new Cliente(id, input)
+  Mutation: {
+    crearCliente : (_,{input}) => {
+    console.log("TCL: input////////", input)
+      
+        const id = require('crypto').randomBytes(10).toString('hex')
+        clientesDB[id] = input
+        return new Cliente(id, input)
+    }
   }
 } 
-
-export default resolvers

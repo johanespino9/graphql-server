@@ -1,57 +1,11 @@
-import { buildSchema } from 'graphql'
-const schema = buildSchema(`
-    type Cliente{
-        id: ID
-        nombre: String
-        apellido: String
-        empresa: String
-        emails: [Email]
-        edad: Int
-        tipo: TipoCliente
-        pedidos: [Pedido] 
-    }
+import { resolvers } from './resolver'
+import { importSchema } from 'graphql-import'
+import { makeExecutableSchema } from 'graphql-tools'
 
-    type Email {
-        email: String
-    }
+const typeDefs = importSchema('schema.graphql') 
 
-    type Pedido {
-        producto: String
-        precio: Int
-    }
 
-    enum TipoCliente {
-        BASICO
-        PREMIUM
-    }
 
-    type Query {
-        getCliente(id: ID): Cliente
-    }
+const schema = makeExecutableSchema({ typeDefs, resolvers })
 
-    input PedidoInput {
-        producto: String!
-        precio: Int!
-    }
-
-    input EmailInput {
-        email : String!
-    }
-
-    input ClienteInput {
-        id: ID
-        nombre: String!
-        apellido: String!
-        empresa: String!
-        emails: [EmailInput]
-        edad: Int!
-        tipo: TipoCliente!
-        pedido: [PedidoInput]
-    }
-
-    type Mutation {
-        crearCliente(input: ClienteInput): Cliente
-    }
-`)
-
-export default schema
+export { schema }
