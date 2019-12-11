@@ -9,6 +9,12 @@ export const resolvers = {
       return Clientes.find({}).limit(limite)
     },
     getCliente : (_,{id}) => {
+      return new Promise((resolve, object) => {
+        Clientes.findById(id, (error, cliente) => {
+          if(error) rejects(error)
+          else resolve(cliente)
+        }) 
+      })
       //return new Cliente(id, clientesDB[id])
     }
   },
