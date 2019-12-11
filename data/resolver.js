@@ -5,8 +5,8 @@ import { rejects } from 'assert'
 // resolver
 export const resolvers = { 
   Query: {
-    getClientes : () => {
-      return Clientes.find({})
+    getClientes : (_, { limite }) => {
+      return Clientes.find({}).limit(limite)
     },
     getCliente : (_,{id}) => {
       //return new Cliente(id, clientesDB[id])
