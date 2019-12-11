@@ -24,6 +24,7 @@
     }
 
     type Query {
+		getClientes : [Cliente]
         getCliente(id: ID): Cliente
     }
 

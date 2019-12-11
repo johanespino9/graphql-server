@@ -5,9 +5,12 @@ import { rejects } from 'assert'
 // resolver
 export const resolvers = { 
   Query: {
-    getCliente: (_,{id}) => {
-      return new Cliente(id, clientesDB[id])
+    getClientes : () => {
+      return Clientes.find({})
     },
+    getCliente : (_,{id}) => {
+      //return new Cliente(id, clientesDB[id])
+    }
   },
   Mutation: {
     crearCliente : (_,{input}) => {
